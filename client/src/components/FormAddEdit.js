@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import axios from "axios";
 
 //the component wil addapt with the context if is it in the edit context or a add context
 // depending of the value of isEdited passed as props in each case ture or false
 
-// mail input
+
 
 class FormAddEdit extends Component {
   state = {
@@ -81,7 +81,8 @@ class FormAddEdit extends Component {
       alert("Enter a valid informations ");
     }
   };
-
+ 
+  //cancel button
   handelCancelForm = e => {
     e.preventDefault();
     this.props.handelOpenForm(false);
@@ -92,7 +93,7 @@ class FormAddEdit extends Component {
       email: ""
     });
   };
-
+ // save the form values 
   handelForm = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -159,12 +160,15 @@ class FormAddEdit extends Component {
           >
             Confirm
           </button>
+          {this.props.isEdited?
+          <Link className="delete-btn" to="/">Cancel</Link> :
           <button
             onClick={this.handelCancelForm}
-            className={this.props.isEdited ? "display-none" : "delete-btn"}
+            className="delete-btn"
           >
             Cancel
-          </button>
+          </button>}
+          
         </div>
       </form>
     );

@@ -134,14 +134,16 @@ button {
   justify-content: center;
   margin: 5% 20%;
 }
+
 .edit-btn,
 .delete-btn {
+  font-size: larger;
+  font-weight: 700;
   text-decoration: none;
   text-align: center;
   padding: 3% 5%;
   margin: 5%;
   width: 6rem;
-  font-size: large;
   border-radius: 5px;
   cursor: pointer;
 }

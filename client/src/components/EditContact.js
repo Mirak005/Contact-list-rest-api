@@ -7,6 +7,7 @@ class EditContact extends Component {
     const {contact , updateContactList=()=>{} }= this.props
     return (
       <div className="edit-card">
+      
         <ContactCard
           contact={contact}
           updateContactList={updateContactList}
