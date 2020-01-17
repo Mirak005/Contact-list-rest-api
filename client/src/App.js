@@ -28,25 +28,28 @@ class App extends React.Component {
     contactList: data
   };
 
-  componentDidMount = () => {
+  getContactList = () => {
     axios
       .get("/contact_list")
       .then(res => this.setState({ contactList: res.data }))
-      .catch(err => alert("Error cannot fetch data from the server!"));
+      .catch(err => {
+        alert("Error cannot fetch data from the server!");
+        console.error(err);
+      });
   };
 
-  updateContactList = data => this.setState({ contactList: data });
+  componentDidMount = () => this.getContactList();
 
   render() {
     return (
       <div>
-        <ContactHeader updateContactList={this.updateContactList} />
+        <ContactHeader getContactList={this.getContactList} />
         <Route
           exact
           path="/"
           render={() => (
             <ContactList
-              updateContactList={this.updateContactList}
+              getContactList={this.getContactList}
               contactList={this.state.contactList}
             />
           )}
@@ -55,10 +58,10 @@ class App extends React.Component {
         {this.state.contactList.map(contact => (
           <Route
             key={contact._id}
-            path={`/${contact.name}`}
+            path={`/${contact._id}`}
             render={() => (
               <EditContact
-                updateContactList={this.updateContactList}
+                getContactList={this.getContactList}
                 contact={contact}
               />
             )}

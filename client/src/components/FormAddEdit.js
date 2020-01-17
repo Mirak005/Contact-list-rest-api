@@ -5,8 +5,6 @@ import axios from "axios";
 //the component wil addapt with the context if is it in the edit context or a add context
 // depending of the value of isEdited passed as props in each case ture or false
 
-
-
 class FormAddEdit extends Component {
   state = {
     name: "",
@@ -14,8 +12,7 @@ class FormAddEdit extends Component {
     phoneNumber: "",
     email: ""
   };
-  
-
+  //if is edited true , the component will get the contact informations to update in the form
   componentDidMount = () =>
     this.props.isEdited ? this.setState({ ...this.props.contact }) : null;
 
@@ -32,11 +29,7 @@ class FormAddEdit extends Component {
           email: this.state.email
         })
         .then(
-          res =>
-            axios
-              .get("/contact_list")
-              .then(res => this.props.updateContactList(res.data))
-              .catch(err => alert(err)),
+          this.props.getContactList(),
           this.props.handelOpenForm(false),
           this.setState({
             name: "",
@@ -62,11 +55,7 @@ class FormAddEdit extends Component {
           email: this.state.email
         })
         .then(
-          res =>
-            axios
-              .get("/contact_list")
-              .then(res => this.props.updateContactList(res.data))
-              .catch(err => alert(err)),
+          this.props.getContactList(),
           this.setState({
             name: "",
             lastName: "",
@@ -81,7 +70,7 @@ class FormAddEdit extends Component {
       alert("Enter a valid informations ");
     }
   };
- 
+
   //cancel button
   handelCancelForm = e => {
     e.preventDefault();
@@ -93,7 +82,7 @@ class FormAddEdit extends Component {
       email: ""
     });
   };
- // save the form values 
+  // save the form values
   handelForm = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -160,15 +149,15 @@ class FormAddEdit extends Component {
           >
             Confirm
           </button>
-          {this.props.isEdited?
-          <Link className="delete-btn" to="/">Cancel</Link> :
-          <button
-            onClick={this.handelCancelForm}
-            className="delete-btn"
-          >
-            Cancel
-          </button>}
-          
+          {this.props.isEdited ? (
+            <Link className="delete-btn" to="/">
+              Cancel
+            </Link>
+          ) : (
+            <button onClick={this.handelCancelForm} className="delete-btn">
+              Cancel
+            </button>
+          )}
         </div>
       </form>
     );

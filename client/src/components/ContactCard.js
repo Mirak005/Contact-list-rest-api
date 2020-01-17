@@ -4,17 +4,14 @@ import axios from "axios";
 
 function ContactCard({
   contact: { name, lastName, phoneNumber, email, _id },
-  updateContactList = () => {},
+  getContactList = () => {},
   isEdited
 }) {
   const handelDeleteContact = () => {
     axios
       .delete(`/delete_contact/${_id}`)
       .then(
-        axios
-          .get("/contact_list")
-          .then(res => updateContactList(res.data))
-          .catch(err => alert(err))
+        getContactList()
       )
       .catch(err => alert(err));
   };
@@ -24,7 +21,7 @@ function ContactCard({
       <div className="card-header">
         <h2 className="contact-icon">{name[0].toUpperCase()}</h2>
         <h2 className="contact-name">
-          {name.toUpperCase() + " " + lastName.toUpperCase()}
+         { `${name.toUpperCase()} ${lastName.toUpperCase()}`}
         </h2>
       </div>
       <div className="contact-info">
@@ -38,7 +35,7 @@ function ContactCard({
       <div className="btn-container">
         <Link
           className={isEdited ? "display-none" : "edit-btn"}
-          to={`/${name}`}
+          to={`/${_id}`}
         >
           Edit
         </Link>

@@ -4,19 +4,20 @@ import ContactCard from "./ContactCard";
 
 class EditContact extends Component {
   render() {
-    const {contact , updateContactList=()=>{} }= this.props
+    const {contact , getContactList=()=>{} }= this.props
     return (
       <div className="edit-card">
       
         <ContactCard
           contact={contact}
-          updateContactList={updateContactList}
+          getContactList={getContactList}
           isEdited={true}
         />
         <FormAddEdit
+        
           contact={contact}
           isEdited={true}
-          updateContactList={updateContactList}
+          getContactList={getContactList}
         />
       </div>
     );

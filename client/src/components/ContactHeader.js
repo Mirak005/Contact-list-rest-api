@@ -11,7 +11,7 @@ class ContactHeader extends Component {
     this.setState({ isOpen: condition });
   };
   render() {
-    const {updateContactList=()=>{}}=this.props
+    const {getContactList=()=>{}}=this.props
     return (
       <div className="contact-header-container">
         <div>
@@ -31,7 +31,7 @@ class ContactHeader extends Component {
         <FormAddEdit
           handelOpenForm={this.handelOpenForm}
           isOpen={this.state.isOpen}
-          updateContactList={updateContactList}
+          getContactList={getContactList}
         />
         
       </div>

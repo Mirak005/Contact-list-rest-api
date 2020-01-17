@@ -1,11 +1,11 @@
 import React from "react";
 import ContactCard from "./ContactCard";
 
-function ContactList({ contactList, updateContactList = () => {} }) {
+function ContactList({ contactList, getContactList = () => {} }) {
   return contactList.map(contact => (
     <ContactCard
       key={contact._id}
-      updateContactList={updateContactList}
+      getContactList={getContactList}
       contact={contact}
       isEdited={false}
     />
