@@ -19,7 +19,7 @@ class FormAddEdit extends Component {
     this.props.isEdited ? this.setState({ ...this.props.contact }) : null;
 
 
-    //form validation handel the missing informations or the invalid email
+    //form validation handel the missing informations or the invalid email adress
     formValidation = () => {
       return Object.values(this.state).indexOf("") !== -1
         ? "There is a missing information(s)"
