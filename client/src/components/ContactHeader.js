@@ -7,7 +7,7 @@ class ContactHeader extends Component {
     isOpen: false
   };
 
-  handelOpenForm = condition => {
+  handelOpenAddForm = condition => {
     this.setState({ isOpen: condition });
   };
   render() {
@@ -15,12 +15,14 @@ class ContactHeader extends Component {
     return (
       <div className="contact-header-container">
         <div>
-          <h2 className="header-title">Contact List </h2>
-          <p className="click-here-message">Click here to add a new contact</p>
+          <h2 className="header-title">Contact-List-App </h2>
+          
           <button
             className="add-contact-button"
-            onClick={() => this.handelOpenForm(true)}
+            onClick={() => this.handelOpenAddForm(true)}
           >
+            <p className="click-here-message">Click here to add a new contact</p>
+            
             <img
               className="add-contact-img"
               src={addContact}
@@ -29,7 +31,7 @@ class ContactHeader extends Component {
           </button>
         </div>
         <FormAddEdit
-          handelOpenForm={this.handelOpenForm}
+          handelOpenAddForm={this.handelOpenAddForm}
           isOpen={this.state.isOpen}
           getContactList={getContactList}
         />

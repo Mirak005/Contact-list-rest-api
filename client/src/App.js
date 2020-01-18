@@ -28,6 +28,7 @@ class App extends React.Component {
     contactList: data
   };
 
+  //get the contact list and set the state of the contactlist key
   getContactList = () => {
     axios
       .get("/contact_list")

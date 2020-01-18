@@ -12,15 +12,30 @@ class FormAddEdit extends Component {
     phoneNumber: "",
     email: ""
   };
+
+  
   //if is edited true , the component will get the contact informations to update in the form
   componentDidMount = () =>
     this.props.isEdited ? this.setState({ ...this.props.contact }) : null;
+
+
+    //form validation handel the missing informations or the invalid email
+    formValidation = () => {
+      return Object.values(this.state).indexOf("") !== -1
+        ? "There is a missing information(s)"
+        : !this.state.email.includes("@")
+        ? "Enter a valid email adress"
+        : "There is a missing information(s)";
+    };
 
   //if is edited false
   handelSubmit = e => {
     e.preventDefault();
 
-    if (Object.values(this.state).indexOf("") === -1) {
+    if (
+      Object.values(this.state).indexOf("") === -1 &&
+      this.state.email.includes("@")
+    ) {
       axios
         .post("/add_Contact", {
           name: this.state.name,
@@ -30,7 +45,7 @@ class FormAddEdit extends Component {
         })
         .then(
           this.props.getContactList(),
-          this.props.handelOpenForm(false),
+          this.props.handelOpenAddForm(false),
           this.setState({
             name: "",
             lastName: "",
@@ -40,13 +55,16 @@ class FormAddEdit extends Component {
         )
         .catch(err => alert("Cannot add a Contact"));
     } else {
-      alert(`Check if there is a missing information`);
+      alert(this.formValidation());
     }
   };
   //if is edited true
   handelSumbmitEdit = e => {
     e.preventDefault();
-    if (Object.values(this.state).indexOf("") === -1) {
+    if (
+      Object.values(this.state).indexOf("") === -1 &&
+      this.state.email.includes("@")
+    ) {
       axios
         .put(`/edit_contact/${this.props.contact._id}`, {
           name: this.state.name,
@@ -67,14 +85,14 @@ class FormAddEdit extends Component {
 
         .catch(err => alert("Cannot add a Contact"));
     } else {
-      alert("Enter a valid informations ");
+      alert(this.formValidation());
     }
   };
 
   //cancel button
   handelCancelForm = e => {
     e.preventDefault();
-    this.props.handelOpenForm(false);
+    this.props.handelOpenAddForm(false);
     this.setState({
       name: "",
       lastName: "",
@@ -103,6 +121,9 @@ class FormAddEdit extends Component {
             : "display-none"
         }
       >
+        <h3 className="form-title">
+          {this.props.isEdited ? "Edit Contact" : "Add Contact"}
+        </h3>
         <label>Name</label>
         <input
           type="text"

@@ -15,7 +15,7 @@ button {
 }
 .header-title {
   color: ghostwhite;
-  font-size: 8em;
+  font-size: 5em;
 }
 .contact-header-container p {
   color: ghostwhite;
@@ -28,7 +28,7 @@ button {
   margin: 0 5%;
 }
 .click-here-message {
-  margin: 0 3%;
+  margin: 5% 0;
   font-size: large;
 }
 .add-contact-img {
@@ -43,6 +43,10 @@ button {
 }
 
 /* add form */
+.form-title{
+  text-decoration:underline;
+  color: teal;
+}
 .add-contact-form {
   display: flex;
   flex-direction: column;
@@ -50,9 +54,11 @@ button {
   border-radius: 5px;
   border: 0.5px solid rgba(29, 34, 44, 0.774);
   padding: 0 5%;
-  margin: 1% 10%;
+  margin: 0% 12%;
   z-index: 1;
   animation: fadein 0.5s;
+  height: 100%;
+  width:25%
 }
 @keyframes fadein {
   from {
@@ -218,6 +224,8 @@ button {
   margin: 1% 5%;
   z-index: 1;
   animation: fadein 0.5s;
+  width: 40%;
+  height: 115%;
 }
 @keyframes fadein {
   from {
